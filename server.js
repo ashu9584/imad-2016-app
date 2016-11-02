@@ -9,7 +9,7 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
 });
 app.get('/dbtest', function (req, res) {
-  res.send(process.env.dbpass);
+  res.send(" This is a test message");
 });
 
 app.get('/ui/style.css', function (req, res) {
