@@ -1,2 +1,2 @@
-process.env['dbpas'] = "1234"
-process.env['user'] = "abcd"
+process.env.dbpas = "1234"
+process.env.user = "abcd"
