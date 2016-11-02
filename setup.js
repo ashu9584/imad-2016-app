@@ -1,3 +1,2 @@
-fs = require('fs');
-fs.createReadStream('.sample-env')
-  .pipe(fs.createWriteStream('.env'));
+process.env['dbpas'] = "1234"
+process.env['user'] = "abcd"
