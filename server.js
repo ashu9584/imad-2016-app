@@ -53,9 +53,20 @@ function quiztemplate(ques)
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
       <script>(function() {
-  var questions = JSON.stringify(${ques});
-    console.log(questions);
-    console.log(ques);
+      var questions =[];
+  for(var i=0;i<${ques.length},i++)
+  { console.log(${ques.length});
+    var q = {
+      question : ${ques[0].question}
+    A: ${ques[0].A}
+    B: ${ques[0].B}
+    C: ${ques[0].C}
+    D: ${ques[0].D}
+    correctAnswer : = ${ques[0].correctAnswer}
+  }
+    console.log(q);
+      
+  }
   var questionCounter = 0; //Tracks question number
   var selections = []; //Array containing user choices
   var quiz = $('#quiz'); //Quiz div object
