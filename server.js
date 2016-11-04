@@ -64,7 +64,7 @@ function quiztemplate(ques)
     B: "${ques[i].B}",
     C: "${ques[i].C}",
     D: "${ques[i].D}",
-    correctAnswer : = ${ques[i].correctAnswer}
+    correctAnswer : ${ques[i].correctAnswer}
   });`
   }
   temp = temp + `
