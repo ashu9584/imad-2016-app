@@ -53,7 +53,7 @@ function quiztemplate(ques)
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
       <script>(function() {
-  var questions = ${ques};
+  var questions = JSON.parse(${ques});
 
   var questionCounter = 0; //Tracks question number
   var selections = []; //Array containing user choices
