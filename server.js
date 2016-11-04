@@ -53,7 +53,6 @@ function quiztemplate(ques)
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
       <script>(function() {
-      ${alert("this is a test message ")}
   var questions = [{
     question: "What is 2*5?",
     A: 2,
