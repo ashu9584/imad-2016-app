@@ -59,11 +59,11 @@ function quiztemplate(ques)
   { 
     temp = temp + `
     questions.append({
-      question : ${ques[i].question}
-    A: ${ques[i].A}
-    B: ${ques[i].B}
-    C: ${ques[i].C}
-    D: ${ques[i].D}
+      question : "${ques[i].question}"
+    A: "${ques[i].A}"
+    B: "${ques[i].B}"
+    C: "${ques[i].C}"
+    D: "${ques[i].D}"
     correctAnswer : = ${ques[i].correctAnswer}
   });`
   }
