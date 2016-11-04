@@ -20,6 +20,7 @@ var pool = new pg.Pool(config);
 function quiztemplate()
 {
     var temp = `
+    <!DOCTYPE html>
     <html>
     <head>
   <meta charset="UTF-8">
@@ -239,7 +240,9 @@ app.get('/dbtest', function (req, res) {
 app.get('/ui/style.css', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'style.css'));
 });
-
+app.get('/ui/quiz.css', function (req, res) {
+  res.sendFile(path.join(__dirname, 'ui', 'quiz.css'));
+});
 app.get('/ui/madi.png', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'madi.png'));
 });
