@@ -17,8 +17,8 @@ var config = {
 };
 
 var pool = new pg.Pool(config);
-function quiztemplate()
-{
+function quiztemplate(ques)
+{   
     var temp = `
     <!DOCTYPE html>
     <html>
@@ -228,7 +228,20 @@ function quiztemplate()
 
 
 app.get('/takequiz', function (req, res) {
-  res.send(quiztemplate());
+   pool.query("SELECT * FROM questest",function (err,result){
+        if(err){
+            res.status(500).send(err.toString());
+        }
+        else{
+            if(result.rows.length === 0){
+                res.status(404).send("The quiz is not found");
+            }
+            else{
+                var ques = result.rows;
+                res.send(quiztemplate(ques));
+            }
+        }
+    });
 });
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
