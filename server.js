@@ -53,42 +53,7 @@ function quiztemplate(ques)
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
       <script>(function() {
-  var questions = [{
-    question: "What is 2*5?",
-    A: 2,
-    B: 5,
-    C: 10,
-    D: 15,
-    correctAnswer: 3
-  }, {
-    question: "What is 3*6?",
-    A: 2,
-    B: 5,
-    C: 18,
-    D: 15,
-    correctAnswer: 3
-  }, {
-    question: "What is 8*9?",
-    A: 2,
-    B: 5,
-    C: 18,
-    D: 72,
-    correctAnswer: 4
-  }, {
-    question: "What is 1*7?",
-    A: 7,
-    B: 5,
-    C: 18,
-    D: 15,
-    correctAnswer: 1
-  }, {
-    question: "What is 8*8?",
-    A: 2,
-    B: 64,
-    C: 18,
-    D: 15,
-    correctAnswer: 2
-  }];
+  var questions = ${ques};
 
   var questionCounter = 0; //Tracks question number
   var selections = []; //Array containing user choices
