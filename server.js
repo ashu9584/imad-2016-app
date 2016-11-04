@@ -58,7 +58,7 @@ function quiztemplate(ques)
   for(var i=0;i<ques.length;i++)
   { 
     temp = temp + `
-    questions.append({
+    questions.push({
       question : "${ques[i].question}",
     A: "${ques[i].A}",
     B: "${ques[i].B}",
