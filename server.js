@@ -57,13 +57,13 @@ function quiztemplate(ques)
   for(var i=0;i<${ques.length},i++)
   { console.log(${ques.length});
     var q = {
-      question : ${ques[0].question}
-    A: ${ques[0].A}
-    B: ${ques[0].B}
-    C: ${ques[0].C}
-    D: ${ques[0].D}
-    correctAnswer : = ${ques[0].correctAnswer}
-  }
+      question : ${ques[i].question}
+    A: ${ques[i].A}
+    B: ${ques[i].B}
+    C: ${ques[i].C}
+    D: ${ques[i].D}
+    correctAnswer : = ${ques[i].correctAnswer}
+  };
     console.log(q);
       
   }
