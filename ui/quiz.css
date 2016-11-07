@@ -47,10 +47,10 @@ button {
     width:50%;
     margin:auto;
     padding: 0 25px 40px 10px;
-    background-color: #1E90FF;
+    background-color: #3D9970;
     border:4px solid #B0E0E6;
     border-radius:5px;
-    color: red;
+    color: #FFFFFF;
     font-weight: bold;
     box-shadow: 5px 5px 5px #888;
 }
