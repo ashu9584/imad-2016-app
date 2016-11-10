@@ -179,7 +179,7 @@ function quiztemplate(ques)
   }
   // Reads the user selection and pushes the value to an array
   function choose() {
-    selections[questionCounter] = +[questions[questionCounter].id,$('input[name="answer"]:checked').val())];
+    selections[questionCounter] = +[questions[questionCounter].id,$('input[name="answer"]:checked').val()];
   }
   // Displays next requested element
   function displayNext() {
