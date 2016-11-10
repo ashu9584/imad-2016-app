@@ -15,7 +15,7 @@ var config = {
     port :'5432',
     password: process.env.DB_PASSWORD  
 };
-var io = require('socket.io').listen(server);
+//var io = require('socket.io').listen(server);
 var pool = new pg.Pool(config);
 function quiztemplate(ques)
 {   
