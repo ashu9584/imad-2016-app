@@ -82,6 +82,7 @@ function quiztemplate(ques)
     B: "${ques[i].B}",
     C: "${ques[i].C}",
     D: "${ques[i].D}",
+    id: ${ques[i].id}
   });`
   }
   temp = temp + `
@@ -155,30 +156,30 @@ function quiztemplate(ques)
     var input = '';
     //for (var i = 0; i < 4; i++) {
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value="';
-      input += questions[index].A + '" />' + questions[index].A;
+      input = '<input id="choice" type="radio" name="answer" value=' + 1 + ' />';
+      input += questions[index].A;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value="';
-      input += questions[index].B + '" />' + questions[index].B;
+      input = '<input id="choice" type="radio" name="answer" value=' + 2 + ' />';
+      input += questions[index].B;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value="';
-      input += questions[index].C + '" />' + questions[index].C;
+      input = '<input id="choice" type="radio" name="answer" value=' + 3 + ' />';
+      input += questions[index].C;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value="';
-      input += questions[index].D + '" />' + questions[index].D;
+      input = '<input id="choice" type="radio" name="answer" value=' + 4 + ' />';
+      input += questions[index].D;
       item.append(input);
       radioList.append(item);
     return radioList;
   }
   // Reads the user selection and pushes the value to an array
   function choose() {
-    selections[questionCounter] = +$('input[name="answer"]:checked').val();;
+    selections[questionCounter] = +[questions[questionCounter].id,$('input[name="answer"]:checked').val())];
   }
   // Displays next requested element
   function displayNext() {
@@ -209,27 +210,52 @@ function quiztemplate(ques)
   // Computes score and returns a paragraph element to be displayed
   function displayScore() {
     var score = $('<p>',{id: 'question'});
-    var numCorrect = 0;`;
-    for (i = 0; i < ques.length; i++) {
-        ques[i].correctAnswer = hasher(ques[i].correctAnswer.toString());
-    }
-    for (i = 0; i < ques.length; i++) {
-      temp=temp+`
-      if (hasher(selections[${i}].toString()) === ${ques[i].correctAnswer}) 
-        numCorrect++;
-        console.log(selections[${i}])`;
-    }
-    temp = temp +`
-    score.append('You got ' + numCorrect + ' questions out of ' +
-                 questions.length + ' right!!!');
-    return score;
+    var numCorrect = 0;
+    var request = new XMLHttpRequest();
+        
+        // Capture the response and store it in a variable
+        request.onreadystatechange = function () {
+          if (request.readyState === XMLHttpRequest.DONE) {
+              // Take some action
+              if (request.status === 200) {
+                  submit.value = 'Sucess!';
+              } else if (request.status === 403) {
+                  
+              } else if (request.status === 500) {
+                  alert('Something went wrong on the server');
+              } else {
+                  alert('Something went wrong on the server');
+              }
+              request.open('POST', '/submit-score', true);
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.send(JSON.stringify(selections);
+          }
+        }
+  }
 }
 })();</script>
 </body>
 </html> `;
 
     return temp;
-}
+}app.post('/submit-score', function (req, res) {
+   // username, password
+   // {"username": "tanmai", "password": "password"}
+   // JSON
+   var select = req.body.selections;
+   //var password = req.body.password;
+   //var salt = crypto.randomBytes(128).toString('hex');
+   //var dbString = hash(password, salt);
+   /*pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result) {
+      if (err) {
+          res.status(500).send(err.toString());
+      } else {
+          res.send('User successfully created: ' + username);
+      }
+      
+   });*/
+   res.send(select);
+});
 app.post('/create-user', function (req, res) {
    // username, password
    // {"username": "tanmai", "password": "password"}
