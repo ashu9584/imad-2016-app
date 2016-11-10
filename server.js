@@ -212,7 +212,8 @@ function quiztemplate(ques)
     score.append('You got ' + numCorrect + ' questions out of ' +
                  questions.length + ' right!!!');
     return score;
-}();</script>
+}
+})();</script>
 </body>
 </html> `;
 
