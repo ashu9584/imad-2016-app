@@ -7,7 +7,14 @@ var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-var io = require("socket.io");
+var hasher = function(str) {
+  var hash = 5381,
+      i    = str.length
+  while(i)
+    hash = (hash * 19) ^ str.charCodeAt(--i)
+  return hash >>> 0;
+};
+undefined
 var config = {
     user : 'ashu9584',
     database : 'ashu9584',
@@ -51,8 +58,14 @@ function quiztemplate(ques)
 </html>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
       <script>(function() {
-      var questions =[];`;
-      
+      var questions =[];
+      var hasher = function(str) {
+  var hash = 5381,
+      i    = str.length
+  while(i)
+    hash = (hash * 19) ^ str.charCodeAt(--i)
+  return hash >>> 0;
+};`;
   for(var i=0;i<ques.length;i++)
   { 
     temp = temp + `
@@ -62,7 +75,6 @@ function quiztemplate(ques)
     B: "${ques[i].B}",
     C: "${ques[i].C}",
     D: "${ques[i].D}",
-    correctAnswer : ${ques[i].correctAnswer}
   });`
   }
   temp = temp + `
@@ -136,22 +148,22 @@ function quiztemplate(ques)
     var input = '';
     //for (var i = 0; i < 4; i++) {
       item = $('<li>');
-      input = '<input type="radio" name="answer" value=' + 1 + ' />';
+      input = '<input id="choice" type="radio" name="answer" value=' + 1 + ' />';
       input += questions[index].A;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input type="radio" name="answer" value=' + 2 + ' />';
+      input = '<input id="choice" type="radio" name="answer" value=' + 2 + ' />';
       input += questions[index].B;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input type="radio" name="answer" value=' + 3 + ' />';
+      input = '<input id="choice" type="radio" name="answer" value=' + 3 + ' />';
       input += questions[index].C;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input type="radio" name="answer" value=' + 4 + ' />';
+      input = '<input id="choice" type="radio" name="answer" value=' + 4 + ' />';
       input += questions[index].D;
       item.append(input);
       radioList.append(item);
@@ -159,7 +171,7 @@ function quiztemplate(ques)
   }
   // Reads the user selection and pushes the value to an array
   function choose() {
-    selections[questionCounter] = +$('input[name="answer"]:checked').val();
+    selections[questionCounter] = +document.getElementById("choice").innerHTML;
   }
   // Displays next requested element
   function displayNext() {
@@ -192,7 +204,7 @@ function quiztemplate(ques)
     var score = $('<p>',{id: 'question'});
     var numCorrect = 0;
     for (var i = 0; i < selections.length; i++) {
-      if (selections[i] === questions[i].correctAnswer) {
+      if (hasher(selections[i]) === hasher(${questions[i].correctAnswer}) {
         numCorrect++;
       }
     }
