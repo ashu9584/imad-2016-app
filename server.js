@@ -11,7 +11,7 @@ var hasher = function(str) {
   var hash = 5381,
       i    = str.length
   while(i)
-    hash = (hash * 19) ^ str.charCodeAt(--i)
+    hash = (hash * 33) ^ str.charCodeAt(--i)
   return hash >>> 0;
 };
 undefined
@@ -204,7 +204,7 @@ function quiztemplate(ques)
     var score = $('<p>',{id: 'question'});
     var numCorrect = 0;`;
     for (i = 0; i < ques.length; i++) {
-        ques[i].correctAnswer = hasher(ques[i].correctAnswer);
+        ques[i].correctAnswer = hasher(ques[i].correctAnswer.toString());
     }
     for (i = 0; i < ques.length; i++) {
       temp=temp+`
