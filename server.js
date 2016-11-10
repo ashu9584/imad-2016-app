@@ -210,7 +210,6 @@ function quiztemplate(ques)
       }`;
     }
     temp = temp +`
-    }
     score.append('You got ' + numCorrect + ' questions out of ' +
                  questions.length + ' right!!!');
     return score;
