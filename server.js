@@ -286,11 +286,17 @@ app.get('/check-login', function (req, res) {
            }
        });
    } else {
-       res.status(400).send('You are not logged in');
+       res.status(400).send('<html><title>Not Logged in </title>You are not logged in, please <a href="/">click here</a> to login');
    }
 });
-app.get('/takequiz', function (req, res) {
-   pool.query("SELECT * FROM questest",function (err,result){
+app.get('/takequiz/:topic', function (req, res) {
+   if (req.session && req.session.auth && req.session.auth.userId) {
+       pool.query('SELECT * FROM "user" WHERE id = $1', [req.session.auth.userId], function (err, result) {
+           if (err) {
+              res.status(500).send(err.toString());
+           } else {
+              //res.send(result.rows[0].username);    
+            pool.query("SELECT * FROM questest WHERE topicid = $1 ORDER BY RANDOM() LIMIT 10",[req.params.topic],function (err,result){
         if(err){
             res.status(500).send(err.toString());
         }
@@ -304,6 +310,12 @@ app.get('/takequiz', function (req, res) {
             }
         }
     });
+               
+           }
+       });
+   } else {
+       res.status(400).send('<html><title>Not Logged in </title>You are not logged in, please <a href="/">click here</a> to login');
+   }
 });
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
