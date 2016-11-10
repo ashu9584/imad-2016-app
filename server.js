@@ -254,6 +254,8 @@ function quiztemplate(ques)
       }
       
    });*/
+   console.log('recieved submit request');
+   console.log(select);
    res.send(select);
 });
 app.post('/create-user', function (req, res) {
