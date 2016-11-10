@@ -332,7 +332,7 @@ app.get('/takequiz/:topic', function (req, res) {
               res.status(500).send(err.toString());
            } else {
               //res.send(result.rows[0].username);    
-            pool.query("SELECT * FROM questest WHERE topicid = $1 ORDER BY RANDOM() LIMIT 10",[req.params.topic],function (err,result){
+            pool.query("SELECT * FROM questest WHERE topicid = $1 ORDER BY RANDOM() LIMIT 3",[req.params.topic],function (err,result){
         if(err){
             res.status(500).send(err.toString());
         }
