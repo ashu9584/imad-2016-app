@@ -231,7 +231,6 @@ function quiztemplate(ques)
         request.send(JSON.stringify(selections));
           }
         }
-  }
 }
 })();</script>
 </body>
