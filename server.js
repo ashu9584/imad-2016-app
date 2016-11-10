@@ -23,7 +23,7 @@ app.use(session({
     secret: 'someRandomSecretValue',
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
-console.log(crypto.gethashes());
+console.log(crypto.getHashes());
 var pool = new pg.Pool(config);
 function quiztemplate(ques)
 {   
