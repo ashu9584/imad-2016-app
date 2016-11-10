@@ -9,7 +9,7 @@ var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-function hasher (input,salt) {
+function hash (input,salt) {
     var hashed = crypto.pbkdf2Sync(input, salt, 1000, 512, 'sha512');
     return ["pbkdf2", "1000", salt, hashed.toString('hex')].join('$');
 }
