@@ -228,7 +228,7 @@ function quiztemplate(ques)
               }
               request.open('POST', '/submit-score', true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify({selections:selections,ids:ids}));
+        request.send(JSON.stringify({"selections":selections,"ids":ids}));
           }
         }
 }
@@ -243,7 +243,7 @@ app.post('/submit-score', function (req, res) {
    // username, password
    // {"username": "tanmai", "password": "password"}
    // JSON
-   //var select = req.body.selections;
+   var select = req.body.selections;
    //var password = req.body.password;
    //var salt = crypto.randomBytes(128).toString('hex');
    //var dbString = hash(password, salt);
@@ -256,7 +256,7 @@ app.post('/submit-score', function (req, res) {
       
    });*/
    console.log('recieved submit request');
-   //console.log(select);
+   console.log(select);
    res.send('jhfjfgjhj');
 });
 app.post('/create-user', function (req, res) {
