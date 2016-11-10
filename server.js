@@ -202,7 +202,6 @@ function quiztemplate(ques)
   // Computes score and returns a paragraph element to be displayed
   function displayScore() {
     var score = $('<p>',{id: 'question'});
-    console.log(selections[i]);
     var numCorrect = 0;`;
     for (i = 0; i < ques.length; i++) {
         ques[i].correctAnswer = hasher(ques[i].correctAnswer.toString());
