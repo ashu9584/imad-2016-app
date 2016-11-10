@@ -148,22 +148,22 @@ function quiztemplate(ques)
     var input = '';
     //for (var i = 0; i < 4; i++) {
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value=";
+      input = '<input id="choice" type="radio" name="answer" value="';
       input += questions[index].A + '" />' + questions[index].A;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value=";
+      input = '<input id="choice" type="radio" name="answer" value="';
       input += questions[index].B + '" />' + questions[index].B;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value=";
+      input = '<input id="choice" type="radio" name="answer" value="';
       input += questions[index].C + '" />' + questions[index].C;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value=";
+      input = '<input id="choice" type="radio" name="answer" value="';
       input += questions[index].D + '" />' + questions[index].D;
       item.append(input);
       radioList.append(item);
