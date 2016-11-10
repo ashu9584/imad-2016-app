@@ -203,7 +203,7 @@ function quiztemplate(ques)
   function displayScore() {
     var score = $('<p>',{id: 'question'});
     var numCorrect = 0;`;
-    for (i = 0; i < selections.length; i++) {
+    for (i = 0; i < ques.length; i++) {
       temp=temp+`
       if (hasher(selections[${i}]) === hasher(${questions[i].correctAnswer}) {
         numCorrect++;
