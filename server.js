@@ -257,7 +257,7 @@ app.post('/submit-score', function (req, res) {
    });*/
    console.log('recieved submit request');
    console.log(select);
-   res.send(select);
+   res.send('jhfjfgjhj');
 });
 app.post('/create-user', function (req, res) {
    // username, password
