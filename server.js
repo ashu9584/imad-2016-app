@@ -39,7 +39,7 @@ function quiztemplate(ques)
     <head>
   <meta charset="UTF-8">
   <title>Dynamic JS Quiz</title>
-    <link rel="stylesheet" href="ui/quiz.css">
+    <link rel="stylesheet" href="/ui/quiz.css">
 </head>
 <body>
 <html>
