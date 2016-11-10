@@ -60,10 +60,10 @@ function quiztemplate(ques)
       <script>(function() {
       var questions =[];
       var hasher = function(str) {
-    var hash = 5381,
-      var  i= str.length
+    var hash = 5381;
+      var i= str.length;
   while(i)
-    hash = (hash * 19) ^ str.charCodeAt(--i)
+    hash = (hash * 19) ^ str.charCodeAt(--i);
   return hash >>> 0;
 };`;
   for(var i=0;i<ques.length;i++)
