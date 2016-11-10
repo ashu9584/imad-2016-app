@@ -31,7 +31,7 @@ app.use(session({
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
 var pool = new pg.Pool(config);
-function quiztemplate(ques)
+function quiztemplate(ques,user)
 {   
     var temp = `
     <!DOCTYPE html>
@@ -200,32 +200,33 @@ function quiztemplate(ques)
           $('#next').show();
         }
       }else {
-      
-      var request = new XMLHttpRequest();
-        // Capture the response and store it in a variable
-        request.onreadystatechange = function () {
-          if (request.readyState === XMLHttpRequest.DONE) {
-              // Take some action
-              if (request.status === 200) {
-                  alert("success");
-              } else if (request.status === 403) {
-                  alert('Something went wrong on the server');
-              } else if (request.status === 500) {
-                  alert('Something went wrong on the server');
-              } else {
-                  alert('Something went wrong on the server');
-              }
-              request.open('POST', '/submit-score', true);
-        request.setRequestHeader('Content-Type', 'application/json');
-        request.send({"selections":[1,2,3]});
-          }
-        }
+      var scoreElem = displayScore();
+        quiz.append(scoreElem).fadeIn();
         $('#next').hide();
         $('#prev').hide();
         $('#start').show();
       }
     });
   }
+  // Computes score and returns a paragraph element to be displayed
+  function displayScore() {
+    var score = $('<p>',{id: 'question'});
+    var numCorrect = 0;`;
+    for (i = 0; i < ques.length; i++) {
+        ques[i].correctAnswer = hasher(ques[i].correctAnswer.toString());
+    }
+    for (i = 0; i < ques.length; i++) {
+      temp=temp+`
+      if (hasher(selections[${i}].toString()) === ${ques[i].correctAnswer}) 
+        numCorrect++;
+        console.log(selections[${i}])`;
+    }
+    temp = temp +`
+    score.append('You got ' + numCorrect + ' questions out of ' +
+                 questions.length + ' right!!!');
+    
+    return score;
+}
 })();</script>
 </body>
 </html> `;
@@ -335,7 +336,7 @@ app.get('/takequiz/:topic', function (req, res) {
             }
             else{
                 var ques = result.rows;
-                res.send(quiztemplate(ques));
+                res.send(quiztemplate(ques,req.session.auth.userId));
             }
         }
     });
