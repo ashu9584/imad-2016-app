@@ -219,7 +219,7 @@ function quiztemplate(ques)
           if (request.readyState === XMLHttpRequest.DONE) {
               // Take some action
               if (request.status === 200) {
-                  submit.value = 'Sucess!';
+                  console.log("success");
               } else if (request.status === 403) {
                   alert('Something went wrong on the server');
               } else if (request.status === 500) {
@@ -238,7 +238,9 @@ function quiztemplate(ques)
 </html> `;
 
     return temp;
-}app.post('/submit-score', function (req, res) {
+}
+
+app.post('/submit-score', function (req, res) {
    // username, password
    // {"username": "tanmai", "password": "password"}
    // JSON
