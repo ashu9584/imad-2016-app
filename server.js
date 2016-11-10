@@ -100,7 +100,7 @@ function quiztemplate(ques)
     }
     choose();
     // If no user selection, progress is stopped
-    if (isNaN(selections[questionCounter])) {
+    if (isNaN(selections[questionCounter][1])) {
       alert('Please make a selection!');
     } else {
       questionCounter++;
@@ -188,8 +188,8 @@ function quiztemplate(ques)
       if(questionCounter < questions.length){
         var nextQuestion = createQuestionElement(questionCounter);
         quiz.append(nextQuestion).fadeIn();
-        if (!(isNaN(selections[questionCounter]))) {
-          $('input[value='+selections[questionCounter]+']').prop('checked', true);
+        if (!(isNaN(selections[questionCounter][1]))) {
+          $('input[value='+selections[questionCounter][1]+']').prop('checked', true);
         }
         // Controls display of 'prev' button
         if(questionCounter === 1){
