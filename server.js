@@ -7,7 +7,7 @@ var app = express();
 app.use(morgan('combined'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
-
+var io = require("socket.io");
 var config = {
     user : 'ashu9584',
     database : 'ashu9584',
