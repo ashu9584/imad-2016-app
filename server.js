@@ -15,7 +15,7 @@ var config = {
     port :'5432',
     password: process.env.DB_PASSWORD  
 };
-
+var io = require('socket.io').listen(server);
 var pool = new pg.Pool(config);
 function quiztemplate(ques)
 {   
@@ -50,9 +50,14 @@ function quiztemplate(ques)
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	</body>
 </html>
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="/socket.io/socket.io.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 
       <script>(function() {
+      var socket = io.connect('http://ashu9584.imad.hasura-app.io/takequiz');
+      var username = prompt('What\'s your username?');
+    socket.emit('nameuser', username);
       var questions =[];`;
       
   for(var i=0;i<ques.length;i++)
@@ -201,39 +206,51 @@ function quiztemplate(ques)
           $('#next').show();
         }
       }else {
-        var scoreElem = displayScore();
+        //var scoreElem = displayScore();
         quiz.append(scoreElem).fadeIn();
         $('#next').hide();
         $('#prev').hide();
         $('#start').show();
+        socket.emit('selection', selections);
       }
     });
   }
-
+  socket.emit('selection', selections);
+  `;
+  
   // Computes score and returns a paragraph element to be displayed
-  function displayScore() {
-    var score = $('<p>',{id: 'question'});
+  //function displayScore() {
+  //  var score = $('<p>',{id: 'question'});
 
-    var numCorrect = 0;
-    for (var i = 0; i < selections.length; i++) {
-      if (selections[i] === questions[i].correctAnswer) {
-        numCorrect++;
-      }
-    }
+   // var numCorrect = 0;
+  //  for (var i = 0; i < selections.length; i++) {
+   //   if (selections[i] === questions[i].correctAnswer) {
+  //      numCorrect++;
+  //    }
+  //  }
 
-    score.append('You got ' + numCorrect + ' questions out of ' +
-                 questions.length + ' right!!!');
-    return score;
-  }
+  //  score.append('You got ' + numCorrect + ' questions out of ' +
+  //               questions.length + ' right!!!');
+ //   return score;
+ // }
+ temp = temp + `
 })();</script>
 
 </body>
-</html> `;
+</html>` ;
 
     return temp;
 }
-
-
+socket.on('nameuser', function(username) {
+    socket.username = username;
+});
+socket.on('selection', function(selections) {
+    
+    client.emit('redirect', '/score');
+});
+app.get('/score', function (req, res) {
+                res.send("testing sockets");
+});
 app.get('/takequiz', function (req, res) {
    pool.query("SELECT * FROM questest",function (err,result){
         if(err){
