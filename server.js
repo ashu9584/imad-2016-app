@@ -148,22 +148,22 @@ function quiztemplate(ques)
     var input = '';
     //for (var i = 0; i < 4; i++) {
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value=' + 1 + ' />';
+      input = '<input id="choice" type="radio" name="answer" value=questions[index].A/>';
       input += questions[index].A;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value=' + 2 + ' />';
+      input = '<input id="choice" type="radio" name="answer" value=questions[index].B />';
       input += questions[index].B;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value=' + 3 + ' />';
+      input = '<input id="choice" type="radio" name="answer" value=questions[index].C />';
       input += questions[index].C;
       item.append(input);
       radioList.append(item);
       item = $('<li>');
-      input = '<input id="choice" type="radio" name="answer" value=' + 4 + ' />';
+      input = '<input id="choice" type="radio" name="answer" value=questions[index].D />';
       input += questions[index].D;
       item.append(input);
       radioList.append(item);
@@ -171,7 +171,7 @@ function quiztemplate(ques)
   }
   // Reads the user selection and pushes the value to an array
   function choose() {
-    selections[questionCounter] = +document.getElementById("choice").innerHTML;
+    selections[questionCounter] = +$('input[name="answer"]:checked').val();;
   }
   // Displays next requested element
   function displayNext() {
