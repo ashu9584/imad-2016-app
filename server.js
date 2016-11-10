@@ -221,7 +221,7 @@ function quiztemplate(ques)
               if (request.status === 200) {
                   submit.value = 'Sucess!';
               } else if (request.status === 403) {
-                  
+                  alert('Something went wrong on the server');
               } else if (request.status === 500) {
                   alert('Something went wrong on the server');
               } else {
