@@ -228,7 +228,7 @@ function quiztemplate(ques)
               }
               request.open('POST', '/submit-score', true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify(selections);
+        request.send(JSON.stringify(selections));
           }
         }
   }
