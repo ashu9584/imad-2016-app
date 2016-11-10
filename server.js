@@ -202,11 +202,14 @@ function quiztemplate(ques)
   // Computes score and returns a paragraph element to be displayed
   function displayScore() {
     var score = $('<p>',{id: 'question'});
-    var numCorrect = 0;
-    for (var i = 0; i < selections.length; i++) {
-      if (hasher(selections[i]) === hasher(${questions[i].correctAnswer}) {
+    var numCorrect = 0;`;
+    for (i = 0; i < selections.length; i++) {
+      temp=temp+`
+      if (hasher(selections[${i}]) === hasher(${questions[i].correctAnswer}) {
         numCorrect++;
-      }
+      }`;
+    }
+    temp = temp +`
     }
     score.append('You got ' + numCorrect + ' questions out of ' +
                  questions.length + ' right!!!');
