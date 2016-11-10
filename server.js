@@ -11,6 +11,13 @@ function hash (input,salt) {
     var hashed = crypto.pbkdf2Sync(input, salt, 1000, 512, 'sha512');
     return ["pbkdf2", "1000", salt, hashed.toString('hex')].join('$');
 }
+  var hasher = function(str) {
+    var hash = 5381;
+      var i= str.length;
+  while(i)
+    hash = (hash * 33) ^ str.charCodeAt(--i);
+  return hash >>> 0;
+};
 var config = {
     user : 'ashu9584',
     database : 'ashu9584',
