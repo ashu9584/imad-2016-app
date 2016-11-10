@@ -200,7 +200,7 @@ function quiztemplate(ques)
           $('#next').show();
         }
       }else {
-        var scoreElem = displayScore();
+        displayScore();
         quiz.append(scoreElem).fadeIn();
         $('#next').hide();
         $('#prev').hide();
