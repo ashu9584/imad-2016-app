@@ -200,18 +200,8 @@ function quiztemplate(ques)
           $('#next').show();
         }
       }else {
-        displayScore();
-        $('#next').hide();
-        $('#prev').hide();
-        $('#start').show();
-      }
-    });
-  }
-  // Computes score and returns a paragraph element to be displayed
-  function displayScore() {
-    var score = $('<p>',{id: 'question'});
-    var numCorrect = 0;
-    var request = new XMLHttpRequest();
+      
+      var request = new XMLHttpRequest();
         console.log('success');
         // Capture the response and store it in a variable
         request.onreadystatechange = function () {
@@ -231,7 +221,12 @@ function quiztemplate(ques)
         request.send(JSON.stringify({"selections":selections,"ids":ids}));
           }
         }
-}
+        $('#next').hide();
+        $('#prev').hide();
+        $('#start').show();
+      }
+    });
+  }
 })();</script>
 </body>
 </html> `;
