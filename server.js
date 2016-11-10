@@ -204,8 +204,11 @@ function quiztemplate(ques)
     var score = $('<p>',{id: 'question'});
     var numCorrect = 0;`;
     for (i = 0; i < ques.length; i++) {
+        ques[i].correctAnswer = hasher(ques[i].correctAnswer);
+    }
+    for (i = 0; i < ques.length; i++) {
       temp=temp+`
-      if (hasher(selections[${i}]) === ${hasher(${ques[i].correctAnswer)}}) 
+      if (hasher(selections[${i}]) === ${ques[i].correctAnswer}) 
         numCorrect++;`;
     }
     temp = temp +`
