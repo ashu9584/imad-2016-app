@@ -208,7 +208,7 @@ function quiztemplate(ques)
     }
     for (i = 0; i < ques.length; i++) {
       temp=temp+`
-      if (hasher(selections[${i}]) === ${ques[i].correctAnswer}) 
+      if (hasher(selections[${i}].toString()) === ${ques[i].correctAnswer}) 
         numCorrect++;`;
     }
     temp = temp +`
