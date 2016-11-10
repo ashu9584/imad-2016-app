@@ -202,13 +202,12 @@ function quiztemplate(ques)
       }else {
       
       var request = new XMLHttpRequest();
-        console.log('success');
         // Capture the response and store it in a variable
         request.onreadystatechange = function () {
           if (request.readyState === XMLHttpRequest.DONE) {
               // Take some action
               if (request.status === 200) {
-                  console.log("success");
+                  alert("success");
               } else if (request.status === 403) {
                   alert('Something went wrong on the server');
               } else if (request.status === 500) {
@@ -218,7 +217,7 @@ function quiztemplate(ques)
               }
               request.open('POST', '/submit-score', true);
         request.setRequestHeader('Content-Type', 'application/json');
-        request.send(JSON.stringify({"selections":selections,"ids":ids}));
+        request.send(JSON.stringify({"selections":JSON.stringify(selections),"ids":JSON.stringify(ids)}));
           }
         }
         $('#next').hide();
@@ -251,7 +250,6 @@ app.post('/submit-score', function (req, res) {
       
    });*/
    console.log('recieved submit request');
-   console.log(select);
    res.send('jhfjfgjhj');
 });
 app.post('/create-user', function (req, res) {
