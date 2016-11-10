@@ -98,6 +98,9 @@ function loadLogin () {
                 loadLoginForm();
             }
         }
+        else{
+            console.log("xml http unsuccessful");
+        }
     };
     
     request.open('GET', '/check-login', true);
