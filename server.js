@@ -212,7 +212,7 @@ function quiztemplate(ques)
     var score = $('<p>',{id: 'question'});
     var numCorrect = 0;
     var request = new XMLHttpRequest();
-        console.log('success);
+        console.log('success');
         // Capture the response and store it in a variable
         request.onreadystatechange = function () {
           if (request.readyState === XMLHttpRequest.DONE) {
