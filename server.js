@@ -237,7 +237,7 @@ app.post('/submit-score', function (req, res) {
    // username, password
    // {"username": "tanmai", "password": "password"}
    // JSON
-   //var select = req.body.selections;
+   var select = req.body.selections;
    //var password = req.body.password;
    //var salt = crypto.randomBytes(128).toString('hex');
    //var dbString = hash(password, salt);
