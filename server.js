@@ -205,9 +205,8 @@ function quiztemplate(ques)
     var numCorrect = 0;`;
     for (i = 0; i < ques.length; i++) {
       temp=temp+`
-      if (hasher(selections[${i}]) === hasher(${ques[i].correctAnswer}) {
-        numCorrect++;
-      }`;
+      if (hasher("selections[${i}]") === ${hasher("ques[i].correctAnswer")}) 
+        numCorrect++;`;
     }
     temp = temp +`
     score.append('You got ' + numCorrect + ' questions out of ' +
