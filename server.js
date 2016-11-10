@@ -87,7 +87,7 @@ function quiztemplate(ques)
   }
   temp = temp + `
   var questionCounter = 0; //Tracks question number
-  var selections = []; //Array containing user choices
+  var selections = [],ids=[]; //Array containing user choices
   var quiz = $('#quiz'); //Quiz div object
   // Display initial question
   displayNext();
@@ -100,7 +100,7 @@ function quiztemplate(ques)
     }
     choose();
     // If no user selection, progress is stopped
-    if (isNaN(selections[questionCounter][1])) {
+    if (isNaN(selections[questionCounter])) {
       alert('Please make a selection!');
     } else {
       questionCounter++;
@@ -179,7 +179,8 @@ function quiztemplate(ques)
   }
   // Reads the user selection and pushes the value to an array
   function choose() {
-    selections[questionCounter] = +[questions[questionCounter].id,$('input[name="answer"]:checked').val()];
+    selections[questionCounter] = +$('input[name="answer"]:checked').val();
+    ids[questionCounter]=+questions[questionCounter].id;
   }
   // Displays next requested element
   function displayNext() {
@@ -188,8 +189,8 @@ function quiztemplate(ques)
       if(questionCounter < questions.length){
         var nextQuestion = createQuestionElement(questionCounter);
         quiz.append(nextQuestion).fadeIn();
-        if (!(isNaN(selections[questionCounter][1]))) {
-          $('input[value='+selections[questionCounter][1]+']').prop('checked', true);
+        if (!(isNaN(selections[questionCounter]))) {
+          $('input[value='+selections[questionCounter]+']').prop('checked', true);
         }
         // Controls display of 'prev' button
         if(questionCounter === 1){
