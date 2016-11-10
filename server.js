@@ -15,7 +15,7 @@ var config = {
     port :'5432',
     password: process.env.DB_PASSWORD  
 };
-//var io = require('socket.io').listen(server);
+
 var pool = new pg.Pool(config);
 function quiztemplate(ques)
 {   
@@ -46,18 +46,11 @@ function quiztemplate(ques)
     		<button class="" id="prev">Prev</a></button>
     		<button class="" id="start"> Start Over</a></button> -->
     	</div>
-
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	</body>
 </html>
-<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script src="/socket.io/socket.io.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
       <script>(function() {
-      var socket = io.connect('http://ashu9584.imad.hasura-app.io/takequiz');
-      var username = prompt('What\'s your username?');
-    socket.emit('nameuser', username);
       var questions =[];`;
       
   for(var i=0;i<ques.length;i++)
@@ -76,20 +69,16 @@ function quiztemplate(ques)
   var questionCounter = 0; //Tracks question number
   var selections = []; //Array containing user choices
   var quiz = $('#quiz'); //Quiz div object
-
   // Display initial question
   displayNext();
-
   // Click handler for the 'next' button
   $('#next').on('click', function (e) {
     e.preventDefault();
-
     // Suspend click listener during fade animation
     if(quiz.is(':animated')) {
       return false;
     }
     choose();
-
     // If no user selection, progress is stopped
     if (isNaN(selections[questionCounter])) {
       alert('Please make a selection!');
@@ -98,11 +87,9 @@ function quiztemplate(ques)
       displayNext();
     }
   });
-
   // Click handler for the 'prev' button
   $('#prev').on('click', function (e) {
     e.preventDefault();
-
     if(quiz.is(':animated')) {
       return false;
     }
@@ -110,11 +97,9 @@ function quiztemplate(ques)
     questionCounter--;
     displayNext();
   });
-
   // Click handler for the 'Start Over' button
   $('#start').on('click', function (e) {
     e.preventDefault();
-
     if(quiz.is(':animated')) {
       return false;
     }
@@ -123,7 +108,6 @@ function quiztemplate(ques)
     displayNext();
     $('#start').hide();
   });
-
   // Animates buttons on hover
   $('.button').on('mouseenter', function () {
     $(this).addClass('active');
@@ -131,26 +115,20 @@ function quiztemplate(ques)
   $('.button').on('mouseleave', function () {
     $(this).removeClass('active');
   });
-
   // Creates and returns the div that contains the questions and
   // the answer selections
   function createQuestionElement(index) {
     var qElement = $('<div>', {
       id: 'question'
     });
-
     var header = $('<h2>Question ' + (index + 1) + ':</h2>');
     qElement.append(header);
-
     var question = $('<p>').append(questions[index].question);
     qElement.append(question);
-
     var radioButtons = createRadios(index);
     qElement.append(radioButtons);
-
     return qElement;
   }
-
   // Creates a list of the answer choices as radio inputs
   function createRadios(index) {
     var radioList = $('<ul>');
@@ -179,78 +157,57 @@ function quiztemplate(ques)
       radioList.append(item);
     return radioList;
   }
-
   // Reads the user selection and pushes the value to an array
   function choose() {
     selections[questionCounter] = +$('input[name="answer"]:checked').val();
   }
-
   // Displays next requested element
   function displayNext() {
     quiz.fadeOut(function() {
       $('#question').remove();
-
       if(questionCounter < questions.length){
         var nextQuestion = createQuestionElement(questionCounter);
         quiz.append(nextQuestion).fadeIn();
         if (!(isNaN(selections[questionCounter]))) {
           $('input[value='+selections[questionCounter]+']').prop('checked', true);
         }
-
         // Controls display of 'prev' button
         if(questionCounter === 1){
           $('#prev').show();
         } else if(questionCounter === 0){
-
           $('#prev').hide();
           $('#next').show();
         }
       }else {
-        //var scoreElem = displayScore();
+        var scoreElem = displayScore();
         quiz.append(scoreElem).fadeIn();
         $('#next').hide();
         $('#prev').hide();
         $('#start').show();
-        socket.emit('selection', selections);
       }
     });
   }
-  socket.emit('selection', selections);
-  `;
-  
   // Computes score and returns a paragraph element to be displayed
-  //function displayScore() {
-  //  var score = $('<p>',{id: 'question'});
-
-   // var numCorrect = 0;
-  //  for (var i = 0; i < selections.length; i++) {
-   //   if (selections[i] === questions[i].correctAnswer) {
-  //      numCorrect++;
-  //    }
-  //  }
-
-  //  score.append('You got ' + numCorrect + ' questions out of ' +
-  //               questions.length + ' right!!!');
- //   return score;
- // }
- temp = temp + `
+  function displayScore() {
+    var score = $('<p>',{id: 'question'});
+    var numCorrect = 0;
+    for (var i = 0; i < selections.length; i++) {
+      if (selections[i] === questions[i].correctAnswer) {
+        numCorrect++;
+      }
+    }
+    score.append('You got ' + numCorrect + ' questions out of ' +
+                 questions.length + ' right!!!');
+    return score;
+  }
 })();</script>
-
 </body>
-</html>` ;
+</html> `;
 
     return temp;
 }
-socket.on('nameuser', function(username) {
-    socket.username = username;
-});
-socket.on('selection', function(selections) {
-    
-    client.emit('redirect', '/score');
-});
-app.get('/score', function (req, res) {
-                res.send("testing sockets");
-});
+
+
 app.get('/takequiz', function (req, res) {
    pool.query("SELECT * FROM questest",function (err,result){
         if(err){
