@@ -77,7 +77,7 @@ function quiztemplate(ques,user)
   { 
     temp = temp + `
     questions.push({
-      question : "${ques[i].question}",
+      question : '${ques[i].question}',
     A: "${ques[i].A}",
     B: "${ques[i].B}",
     C: "${ques[i].C}",
