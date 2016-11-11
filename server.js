@@ -42,7 +42,7 @@ function quiztemplate(ques,user,quiz)
     <link rel="stylesheet" href="/ui/quiz.css">
 </head>
 <body>
-<>
+<a href="/"><-Home </a>
 <html>
 	<head>
 		<title>Dynamic Quiz Project</title>
