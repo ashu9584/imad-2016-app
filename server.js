@@ -217,8 +217,19 @@ function quiztemplate(ques,user)
     }
     for (i = 0; i < ques.length; i++) {
       temp=temp+`
-      if (hasher(selections[${i}].toString()) === ${ques[i].correctAnswer}) 
+      if (selections[${i}] === 1)
+      if (hasher(questions[${i}].A.toString()) === ${ques[i].correctAnswer}) 
         numCorrect++;
+      if (selections[${i}] === 2)
+      if (hasher(questions[${i}].B.toString()) === ${ques[i].correctAnswer}) 
+        numCorrect++;
+      if (selections[${i}] === 3)
+      if (hasher(questions[${i}].C.toString()) === ${ques[i].correctAnswer}) 
+        numCorrect++;
+      if (selections[${i}] === 4)
+      if (hasher(questions[${i}].D.toString()) === ${ques[i].correctAnswer}) 
+        numCorrect++;
+      
         console.log(selections[${i}])`;
     }
     temp = temp +`
