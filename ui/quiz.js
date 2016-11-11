@@ -15,3 +15,4 @@ function getuser () {
     request.open('GET', '/check-login', true);
     request.send(null);
 }
+getuser();
