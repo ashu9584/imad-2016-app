@@ -341,7 +341,7 @@ app.get('/takequiz/:topic', function (req, res) {
              else{
                 var ques = result.rows;
                 var quizname = result2.rows;
-                res.send(quiztemplate(ques,req.session.auth.userId,quizname));
+                res.send(quiztemplate(ques,req.session.auth,quizname));
                }
                  }
               });
