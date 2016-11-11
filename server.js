@@ -49,7 +49,7 @@ function quiztemplate(ques,user,quiz)
 	<body>
 		<div id="container">
 			<div id="title">
-				<h1>${quiz[0].topicname}Quiz</h1>
+				<h1>${quiz[0].topicname}  Quiz</h1>
 			</div>
    			<br/>
   			<div id="quiz"></div>
