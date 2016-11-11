@@ -61,6 +61,7 @@ function quiztemplate(ques,user,quiz)
     		<button class="" id="start"> Start Over</a></button> -->
     	</div>
 		<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+		<script src="/ui/quiz.js"></script>
 	</body>
 </html>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
@@ -200,7 +201,7 @@ function quiztemplate(ques,user,quiz)
           $('#next').show();
         }
       }else {
-      var scoreElem = displayScore();
+      var scoreElem = displayScore(user);
         quiz.append(scoreElem).fadeIn();
         $('#next').hide();
         $('#prev').hide();
@@ -209,7 +210,7 @@ function quiztemplate(ques,user,quiz)
     });
   }
   // Computes score and returns a paragraph element to be displayed
-  function displayScore() {
+  function displayScore(username) {
     var score = $('<p>',{id: 'question'});
     var numCorrect = 0;`;
     for (i = 0; i < ques.length; i++) {
@@ -233,7 +234,7 @@ function quiztemplate(ques,user,quiz)
         console.log(selections[${i}])`;
     }
     temp = temp +`
-    score.append('${user}' +'  You got ' + numCorrect + ' questions out of ' +
+    score.append(username +'  You got ' + numCorrect + ' questions out of ' +
                  questions.length + ' right!!!');
     
     return score;
