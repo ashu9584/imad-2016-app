@@ -31,7 +31,7 @@ app.use(session({
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
 var pool = new pg.Pool(config);
-function quiztemplate(ques,user)
+function quiztemplate(ques,user,quiz)
 {   
     var temp = `
     <!DOCTYPE html>
@@ -49,7 +49,7 @@ function quiztemplate(ques,user)
 	<body>
 		<div id="container">
 			<div id="title">
-				<h1>Quiz</h1>
+				<h1>${quiz.topicname}Quiz</h1>
 			</div>
    			<br/>
   			<div id="quiz"></div>
@@ -233,7 +233,7 @@ function quiztemplate(ques,user)
         console.log(selections[${i}])`;
     }
     temp = temp +`
-    score.append('You got ' + numCorrect + ' questions out of ' +
+    score.append('${user}' +'  You got ' + numCorrect + ' questions out of ' +
                  questions.length + ' right!!!');
     
     return score;
@@ -246,28 +246,12 @@ function quiztemplate(ques,user)
 }
 
 app.post('/submit-score', function (req, res) {
-   // username, password
-   // {"username": "tanmai", "password": "password"}
-   // JSON
    var select = req.body.selections;
-   //var password = req.body.password;
-   //var salt = crypto.randomBytes(128).toString('hex');
-   //var dbString = hash(password, salt);
-   /*pool.query('INSERT INTO "user" (username, password) VALUES ($1, $2)', [username, dbString], function (err, result) {
-      if (err) {
-          res.status(500).send(err.toString());
-      } else {
-          res.send('User successfully created: ' + username);
-      }
-      
-   });*/
+ 
    console.log('recieved submit request');
    res.send('jhfjfgjhj');
 });
 app.post('/create-user', function (req, res) {
-   // username, password
-   // {"username": "tanmai", "password": "password"}
-   // JSON
    var username = req.body.username;
    var password = req.body.password;
    var salt = crypto.randomBytes(128).toString('hex');
@@ -346,8 +330,21 @@ app.get('/takequiz/:topic', function (req, res) {
                 res.status(404).send("The quiz is not found");
             }
             else{
+                pool.query("SELECT * FROM topics WHERE topicid = $1",[req.params.topic],function (err2,result2){
+                     if(err2){
+                  res.status(500).send(err.toString());
+                }
+               else{
+               if(result2.rows.length === 0){
+                         res.status(404).send("The quiz is not found");
+                  }
+             else{
                 var ques = result.rows;
-                res.send(quiztemplate(ques,req.session.auth.userId));
+                var quizname = result2.rows;
+                res.send(quiztemplate(ques,req.session.auth.userId,quizname));
+               }
+                 }
+              });
             }
         }
     });
