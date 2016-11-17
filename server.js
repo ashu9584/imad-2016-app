@@ -338,7 +338,7 @@ app.get('/takequiz/:topic', function (req, res) {
                 }
                else{
                if(result2.rows.length === 0){
-                         res.status(404).send("The quiz is not found");
+                         res.status(404).send("<html>The quiz is not found. <a href="/">Click here</a> to return back to home<html>");
                   }
              else{
                 var ques = result.rows;
